@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi All in one | Lengkap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 p-8">
+    <!-- Todo List Section -->
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6 mb-8">
+        <h1 class="text-2xl font-bold text-gray-800 mb-4">📝 To-Do List</h1>
+        <div class="flex gap-2 mb-4">
+            <input type="text" id="todo-input" placeholder="Tambahkan tugas baru..."
+                class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button id="add-todo"
+                class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                Tambah
+            </button>
+        </div>
+        <ul id="todo-list" class="space-y-2"></ul>
+    </div>
+
+    <!-- Validation Form Section -->
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6 mb-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">🔒 Form Validasi</h2>
+        <form id="validation-form" class="space-y-4">
+            <div>
+                <label class="block text-gray-700 mb-2">Nama</label>
+                <input type="text" id="name"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <p id="name-error" class="text-red-500 text-sm mt-1"></p>
+            </div>
+            <div>
+                <label class="block text-gray-700 mb-2">Email</label>
+                <input type="email" id="email"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <p id="email-error" class="text-red-500 text-sm mt-1"></p>
+            </div>
+            <div>
+                <label class="block text-gray-700 mb-2">Password</label>
+                <input type="password" id="password"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <p id="password-error" class="text-red-500 text-sm mt-1"></p>
+            </div>
+            <button type="submit"
+                class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-colors">
+                Submit
+            </button>
+        </form>
+    </div>
+
+    <!-- Kalkulator Section -->
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
+        <div class="event-demo">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">🧮 Kalkulator Lengkap</h2>
+            <!-- Existing code for sapaan -->
+            <!-- ... (bagian sapaan tetap sama seperti kode asli) ... -->
+
+            <!-- Modified Calculator -->
+            <div class="mt-4">
+                <div class="flex gap-2 mb-3">
+                    <input type="number" id="angka1" placeholder="Angka 1"
+                        class="border p-2 rounded flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="number" id="angka2" placeholder="Angka 2"
+                        class="border p-2 rounded flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    <button data-operation="tambah" class="operator-btn bg-blue-500 hover:bg-blue-600">+</button>
+                    <button data-operation="kurang" class="operator-btn bg-blue-500 hover:bg-blue-600">-</button>
+                    <button data-operation="kali" class="operator-btn bg-blue-500 hover:bg-blue-600">×</button>
+                    <button data-operation="bagi" class="operator-btn bg-blue-500 hover:bg-blue-600">÷</button>
+                    <button data-operation="pangkat" class="operator-btn bg-green-500 hover:bg-green-600">^</button>
+                    <button data-operation="modulus" class="operator-btn bg-green-500 hover:bg-green-600">%</button>
+                    <button data-operation="sqrt" class="operator-btn bg-purple-500 hover:bg-purple-600 col-span-2">√
+                        (Angka 1)</button>
+                </div>
+                <div id="hasil-kalkulator" class="mt-3 font-semibold text-lg"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * Todo List
+         */
+        class TodoList {
+            constructor() {
+                this.todos = JSON.parse(localStorage.getItem('todos')) || [];
+                this.init();
+            }
+
+            init() {
+                this.render();
+                document.getElementById('add-todo').addEventListener('click', () => this.addTodo());
+                document.getElementById('todo-input').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.addTodo();
+                });
+            }
+
+            addTodo() {
+                const input = document.getElementById('todo-input');
+                const text = input.value.trim();
+                if (text) {
+                    this.todos.push({ text, completed: false });
+                    input.value = '';
+                    this.save();
+                    this.render();
+                }
+            }
+
+            toggleComplete(index) {
+                this.todos[index].completed = !this.todos[index].completed;
+                this.save();
+                this.render();
+            }
+
+            deleteTodo(index) {
+                this.todos.splice(index, 1);
+                this.save();
+                this.render();
+            }
+
+            save() {
+                localStorage.setItem('todos', JSON.stringify(this.todos));
+            }
+
+            render() {
+                const list = document.getElementById('todo-list');
+                list.innerHTML = this.todos.map((todo, index) => `
+                    <li class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100">
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" ${todo.completed ? 'checked' : ''} 
+                                    onchange="todoList.toggleComplete(${index})" 
+                                    class="w-4 h-4 text-blue-500">
+                            <span class="${todo.completed ? 'line-through text-gray-400' : 'text-gray-700'}">${todo.text}</span>
+                        </div>
+                        <button onclick="todoList.deleteTodo(${index})" 
+                                class="text-red-500 hover:text-red-600">
+                            ✕
+                        </button>
+                    </li>
+                `).join('');
+            }
+        }
+
+        const todoList = new TodoList();
+
+        /**
+         * Form Validation
+         */
+        const form = document.getElementById('validation-form');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const fields = {
+                name: {
+                    value: document.getElementById('name').value,
+                    errorElement: document.getElementById('name-error'),
+                    validate: (value) => value.length > 3,
+                    errorMessage: 'Nama harus lebih dari 3 karakter'
+                },
+                email: {
+                    value: document.getElementById('email').value,
+                    errorElement: document.getElementById('email-error'),
+                    validate: (value) => emailRegex.test(value),
+                    errorMessage: 'Email tidak valid'
+                },
+                password: {
+                    value: document.getElementById('password').value,
+                    errorElement: document.getElementById('password-error'),
+                    validate: (value) => value.length >= 8,
+                    errorMessage: 'Password harus minimal 8 karakter'
+                }
+            };
+
+            let isValid = true;
+
+            Object.values(fields).forEach(({ value, errorElement, validate, errorMessage }) => {
+                if (!validate(value)) {
+                    errorElement.textContent = errorMessage;
+                    isValid = false;
+                } else {
+                    errorElement.textContent = '';
+                }
+            });
+
+            if (isValid) {
+                alert('Form valid! Data bisa dikirim');
+                form.reset();
+            }
+        });
+
+
+        /**
+         * Kalkulator
+         */
+        const operations = {
+            tambah: (a, b) => a + b,
+            kurang: (a, b) => a - b,
+            kali: (a, b) => a * b,
+            bagi: (a, b) => b === 0 ? 'Error: Pembagian dengan nol' : a / b,
+            pangkat: (a, b) => Math.pow(a, b),
+            modulus: (a, b) => a % b,
+            sqrt: (a) => Math.sqrt(a)
+        };
+
+        document.querySelectorAll('.operator-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const operation = this.dataset.operation;
+                const angka1 = parseFloat(document.getElementById('angka1').value);
+                const angka2 = parseFloat(document.getElementById('angka2').value);
+                let hasil;
+
+                if (operation === 'sqrt') {
+                    if (isNaN(angka1)) {
+                        hasil = 'Masukkan angka yang valid!';
+                    } else {
+                        hasil = operations[operation](angka1);
+                    }
+                } else if (isNaN(angka1) || isNaN(angka2)) {
+                    hasil = 'Masukkan angka yang valid!';
+                } else {
+                    hasil = operations[operation](angka1, angka2);
+                }
+
+                const output = document.getElementById('hasil-kalkulator');
+                output.innerHTML = typeof hasil === 'number' ?
+                    `Hasil: ${angka1 || ''} ${this.textContent} ${operation !== 'sqrt' ? angka2 : ''} = ${hasil.toFixed(2)}` :
+                    `<span class="text-red-500">${hasil}</span>`;
+            });
+        });
+    </script>
+</body>
+
+</html>
