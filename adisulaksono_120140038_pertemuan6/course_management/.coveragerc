@@ -1,0 +1,3 @@
+[run]
+source = course_management
+omit = course_management/test*

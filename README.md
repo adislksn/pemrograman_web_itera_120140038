@@ -3,7 +3,8 @@
 - [Tugas 2](./adisulaksono_120140038_pertemuan2/personal-app/index.html)
 - [Tugas 3](./adisulaksono_120140038_pertemuan3/README.md)
 - [Tugas 4](./adisulaksono_120140038_pertemuan4/main.py)
-    .....
+- [Tugas 5](./adisulaksono_120140038_pertemuan5/library-system/main.py)
+- [Tugas 6](./adisulaksono_120140038_pertemuan6/course_management/README.txt)
 
 
 ## Pertemuan 1
