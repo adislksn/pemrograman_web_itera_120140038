@@ -1,0 +1,41 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.task-item {
+    transition: all 0.3s ease;
+}
+
+.task-item:hover {
+    transform: translateX(5px);
+    background-color: #f8f9fa;
+}
+
+.task-actions {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.task-item:hover .task-actions {
+    opacity: 1;
+}
+
+.btn-icon {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+.task-date {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.task-description {
+    font-size: 0.9rem;
+    color: #495057;
+} 
