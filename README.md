@@ -2,6 +2,7 @@
 - [Tugas 1](./adisulaksono_120140038_pertemuan1/index.html)
 - [Tugas 2](./adisulaksono_120140038_pertemuan2/personal-app/index.html)
 - [Tugas 3](./adisulaksono_120140038_pertemuan3/README.md)
+- [Tugas 4](./adisulaksono_120140038_pertemuan4/main.py)
     .....
 
 
@@ -114,6 +115,42 @@ Bobot: 40% dari nilai tugas
         - Menggunakan minimal 2 cara berbeda untuk mengimpor modul/fungsi
 
 Bobot: 30% dari nilai tugas
+
+----
+
+## Pertemuan 5
+Tugas: Sistem Manajemen Perpustakaan Sederhana
+
+Buatlah sistem manajemen perpustakaan sederhana menggunakan konsep OOP Python yang telah dipelajari. Fokus pada implementasi konsep class, inheritance, encapsulation, dan polymorphism.
+
+- Persyaratan:
+    - Buatlah abstract class LibraryItem yang menjadi dasar untuk semua item di perpustakaan
+    - Implementasikan minimal 2 subclass (contoh: Book dan Magazine) yang mewarisi dari LibraryItem
+    - Setiap subclass harus mengimplementasikan minimal satu method abstract dari parent class
+    - Buatlah class Library untuk menyimpan dan mengelola koleksi item perpustakaan
+    - Terapkan encapsulation menggunakan access modifiers (protected/private) untuk melindungi data penting
+    - Gunakan property decorator untuk minimal satu atribut di salah satu class
+    - Sistem minimal harus dapat:
+        - Menambahkan item ke perpustakaan
+        - Menampilkan daftar item yang tersedia
+        - Mencari item berdasarkan judul atau id
+
+----
+
+## Pertemuan 6
+Tugas: Aplikasi Manajemen Matakuliah dengan Pyramid
+
+Buatlah aplikasi API sederhana untuk manajemen matakuliah berdasarkan apa yang telah Anda pelajari dalam praktikum ini.
+
+- Persyaratan:
+    - Buat satu model Matakuliah dengan atribut: id, kode_mk, nama_mk, sks, dan semester
+    - Implementasikan API endpoint untuk operasi dasar (GET, POST, PUT, DELETE)
+    - Pastikan API berfungsi dan dapat diuji dengan curl atau Postman
+
+----
+
+## Pertemuan 7
+
 
 _Adi Sulaksono_
 120140038
