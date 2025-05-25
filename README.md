@@ -149,8 +149,5 @@ Buatlah aplikasi API sederhana untuk manajemen matakuliah berdasarkan apa yang t
 
 ----
 
-## Pertemuan 7
-
-
 _Adi Sulaksono_
 120140038
